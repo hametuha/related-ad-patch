@@ -126,7 +126,7 @@ class AdPostType extends SingletonPattern {
 			}
 		}
 		foreach ( $ads as $ad ) {
-			$key           = rand( 0, count( $posts ) );
+			$key           = rand( 0, count( $posts ) - 1 );
 			$posts[ $key ] = $ad;
 		}
 		return $posts;
