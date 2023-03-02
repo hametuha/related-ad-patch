@@ -56,9 +56,11 @@ class Calculator extends SingletonPattern {
 			    p.post_date DESC
 			LIMIT %d
 SQL;
-		$query = $wpdb->prepare( $query, $post->ID, $post->post_type, $limit );
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$result = $wpdb->get_results( $wpdb->prepare( $query, $post->ID, $post->post_type, $limit ) );
 		return array_map( function( $row ) {
 			return new \WP_Post( $row );
-		}, $wpdb->get_results( $query ) );
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		}, $result );
 	}
 }

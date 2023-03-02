@@ -3,7 +3,7 @@
  * Loop inside post.
  */
 ?>
-<div class="related-posts-item related-posts-item-<?php echo esc_attr( get_post_type() ) ?>">
+<div class="related-posts-item related-posts-item-<?php echo esc_attr( get_post_type() ); ?>">
 	<a class="related-posts-link" href="<?php the_permalink(); ?>"<?php do_action( 'related_post_link_attributes', get_post() ); ?>>
 		<div class="related-posts-thumbnail related-posts-thumbnail-<?php echo esc_attr( get_post_type() ); ?>">
 			<?php the_post_thumbnail(); ?>

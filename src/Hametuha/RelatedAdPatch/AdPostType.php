@@ -8,7 +8,7 @@ use Hametuha\RelatedAdPatch\Pattern\SingletonPattern;
 /**
  * Ad post type.
  */
-class AdPostType extends SingletonPattern  {
+class AdPostType extends SingletonPattern {
 
 	const POST_TYPE = 'related-post-ad';
 
@@ -93,7 +93,7 @@ class AdPostType extends SingletonPattern  {
 				<input type="url" class="regular-text" name="external_url" value="<?php echo esc_attr( get_post_meta( $post->ID, '_external_url', true ) ); ?>" />
 			</label>
 			<label style="display: block; margin: 0 0 20px;">
-				<?php esc_html_e( 'Optional Tag', 'rap' ) ?><br />
+				<?php esc_html_e( 'Optional Tag', 'rap' ); ?><br />
 				<textarea name="optional_tag" style="box-sizing: border-box; width: 100%;" rows="5"><?php echo esc_textarea( get_post_meta( $post->ID, '_optional_tag', true ) ); ?></textarea>
 			</label>
 			<?php
@@ -126,7 +126,7 @@ class AdPostType extends SingletonPattern  {
 			}
 		}
 		foreach ( $ads as $ad ) {
-			$key = rand( 0, count( $posts ) );
+			$key           = rand( 0, count( $posts ) );
 			$posts[ $key ] = $ad;
 		}
 		return $posts;

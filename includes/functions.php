@@ -94,9 +94,9 @@ function the_related_post_patch( $post = null, $count = 8 ) {
  * @return WP_Term[]
  */
 function related_post_get_main_terms( $post = null ) {
-	$post = get_post( $post );
+	$post     = get_post( $post );
 	$taxonomy = apply_filters( 'related_post_patch_main_taxonomy', 'post_tag', $post );
-	$terms = get_the_terms( $post, $taxonomy );
+	$terms    = get_the_terms( $post, $taxonomy );
 	if ( ! $terms || is_wp_error( $terms ) ) {
 		return [];
 	}
