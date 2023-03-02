@@ -13,7 +13,8 @@
     "cli": "wp-env run cli wp",
     "cli:test": "wp-env run tests-cli wp",
     "lint": "stylelint assets/**/*.scss",
-    "gulp": "gulp"
+    "gulp": "gulp",
+	"package": "gulp build"
   },
   "repository": {
     "type": "git",
