@@ -1,0 +1,43 @@
+{
+  "name": "related-ad-patch",
+  "version": "1.0.0",
+  "description": "Gulp task for wordpress-plugin",
+  "main": "gulpfile.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "start": "wp-env start",
+    "update": "wp-env start --update",
+    "stop": "wp-env stop",
+    "cli": "wp-env run cli wp",
+    "cli:test": "wp-env run tests-cli wp",
+    "lint": "stylelint assets/**/*.scss",
+    "gulp": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [],
+  "author": "Tarosky INC",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
+  "devDependencies": {
+    "@wordpress/env": "^5.10.0",
+    "@wordpress/stylelint-config": "^19.1.0",
+    "gulp": "^4.0.0",
+    "gulp-autoprefixer": "^7.0.0",
+    "gulp-load-plugins": "^2.0.8",
+    "gulp-notify": "^4.0.0",
+    "gulp-plumber": "^1.2.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-sass-glob": "^1.0.9",
+    "gulp-sourcemaps": "^3.0",
+    "gulp-stylelint": "^13.0.0",
+    "stylelint": "^13.0.0"
+  }
+}
