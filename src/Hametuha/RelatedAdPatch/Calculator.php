@@ -75,7 +75,7 @@ class Calculator extends SingletonPattern {
 		foreach ( $scores as $taxonomy => $score ) {
 			$when[] = $wpdb->prepare( 'WHEN tt.taxonomy = %s THEN %d', $taxonomy, $score );
 		}
-		$when = implode( "\n", $when );
+		$when  = implode( "\n", $when );
 		$query = <<<SQL
 			SELECT p.* FROM {$wpdb->posts} AS p
 			INNER JOIN (

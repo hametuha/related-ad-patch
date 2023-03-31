@@ -21,7 +21,7 @@
 					if ( $taxonomy ) {
 						echo esc_html( $taxonomy->label );
 					} else {
-						esc_html_e( 'Category'  );
+						esc_html_e( 'Category' );
 					}
 				}
 				?>

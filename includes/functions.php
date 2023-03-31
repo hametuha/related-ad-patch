@@ -115,7 +115,7 @@ function related_post_get_main_terms( $post = null ) {
 	if ( ! $taxonomy ) {
 		return [];
 	}
-	$terms    = get_the_terms( $post, $taxonomy->name );
+	$terms = get_the_terms( $post, $taxonomy->name );
 	if ( ! $terms || is_wp_error( $terms ) ) {
 		return [];
 	}
