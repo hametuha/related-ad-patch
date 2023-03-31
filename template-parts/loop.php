@@ -17,7 +17,12 @@
 				if ( related_post_is_ad() ) {
 					echo 'PR';
 				} else {
-					esc_html_e( 'Tag', 'rap' );
+					$taxonomy = related_post_get_main_taxonomy();
+					if ( $taxonomy ) {
+						echo esc_html( $taxonomy->label );
+					} else {
+						esc_html_e( 'Category'  );
+					}
 				}
 				?>
 			</span>

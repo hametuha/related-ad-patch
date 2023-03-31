@@ -141,9 +141,10 @@ class AdPostType extends SingletonPattern {
 	 */
 	public function get_ads( $ad_count = 2, $order = 'rand' ) {
 		$post_args = [
-			'post_type'      => self::POST_TYPE,
-			'post_status'    => 'publish',
-			'posts_per_page' => $ad_count,
+			'post_type'           => self::POST_TYPE,
+			'post_status'         => 'publish',
+			'posts_per_page'      => $ad_count,
+			'ignore_sticky_posts' => true,
 		];
 		switch ( $order ) {
 			case 'rand':

@@ -10,13 +10,54 @@ use Hametuha\RelatedAdPatch\Pattern\SingletonPattern;
  */
 class Calculator extends SingletonPattern {
 
+	/**
+	 * Post type to calculate.
+	 *
+	 * @return string[]
+	 */
+	protected function post_types() {
+		return apply_filters( 'related_posts_post_types', [ 'post' ] );
+	}
+
+	/**
+	 * Is post type available?
+	 *
+	 * @param string $post_type Post type.
+	 * @return bool
+	 */
+	public function is_available( $post_type ) {
+		return in_array( $post_type, $this->post_types(), true );
+	}
+
+	/**
+	 * Taxonomy and score to calculate related posts.
+	 *
+	 * @param string $post_type Post type.
+	 * @return array
+	 */
+	public function taxonomy_score( $post_type ) {
+		return apply_filters( 'related_posts_taxonomy_score', [
+			'category' => 1,
+			'post_tag' => 3,
+		], $post_type );
+	}
+
+	/**
+	 * Get related posts.
+	 *
+	 * @param null|int|\WP_Post $post  Post object.
+	 * @param int               $limit Number of related posts..
+	 * @return \WP_Post[]
+	 */
 	public function get_related( $post = null, $limit = 10 ) {
 		$post = get_post( $post );
 		if ( ! $post ) {
 			return [];
 		}
+		// Get term ids to filter posts.
 		$tt_ids = [];
-		foreach ( [ 'category', 'post_tag' ] as $taxonomy ) {
+		$scores = $this->taxonomy_score( $post->post_type );
+		foreach ( array_keys( $scores ) as $taxonomy ) {
 			$terms = get_the_terms( $post, $taxonomy );
 			if ( $terms && ! is_wp_error( $terms ) ) {
 				foreach ( $terms as $term ) {
@@ -28,16 +69,19 @@ class Calculator extends SingletonPattern {
 			return [];
 		}
 		$tt_ids = implode( ',', $tt_ids );
+		// Build when clause.
 		global $wpdb;
+		$when = [];
+		foreach ( $scores as $taxonomy => $score ) {
+			$when[] = $wpdb->prepare( 'WHEN tt.taxonomy = %s THEN %d', $taxonomy, $score );
+		}
+		$when = implode( "\n", $when );
 		$query = <<<SQL
 			SELECT p.* FROM {$wpdb->posts} AS p
 			INNER JOIN (
 				SELECT r.object_id, SUM(
 				    CASE
-				        WHEN tt.taxonomy = 'category'
-				    		THEN 1
-						WHEN tt.taxonomy = 'post_tag'
-				    		THEN 3
+				        {$when}
 				    	ELSE 0
 					END
 				) AS score

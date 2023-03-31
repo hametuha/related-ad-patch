@@ -48,6 +48,10 @@ function related_post_get_template_part( $name, $suffix = '', $args = [] ) {
  * @return WP_Post[]
  */
 function related_post_patch( $post = null, $count = 8, $ads = 2 ) {
+	$post = get_post( $post );
+	if ( ! \Hametuha\RelatedAdPatch\Calculator::get_instance()->is_available( $post->post_type ) ) {
+		return [];
+	}
 	$results = \Hametuha\RelatedAdPatch\Calculator::get_instance()->get_related( $post, $count );
 	$results = \Hametuha\RelatedAdPatch\AdPostType::get_instance()->add_ads( $results, $count, $ads, 'rand' );
 	return $results;
@@ -88,6 +92,18 @@ function the_related_post_patch( $post = null, $count = 8 ) {
 }
 
 /**
+ * Get taxonomy.
+ *
+ * @param int|null|WP_Post $post  Post object.
+ * @return false|WP_Taxonomy
+ */
+function related_post_get_main_taxonomy( $post = null ) {
+	$post     = get_post( $post );
+	$taxonomy = apply_filters( 'related_post_patch_main_taxonomy', 'post_tag', $post );
+	return get_taxonomy( $taxonomy );
+}
+
+/**
  * Get related posts terms.
  *
  * @param int|null|WP_Post $post  Post object.
@@ -95,8 +111,11 @@ function the_related_post_patch( $post = null, $count = 8 ) {
  */
 function related_post_get_main_terms( $post = null ) {
 	$post     = get_post( $post );
-	$taxonomy = apply_filters( 'related_post_patch_main_taxonomy', 'post_tag', $post );
-	$terms    = get_the_terms( $post, $taxonomy );
+	$taxonomy = related_post_get_main_taxonomy( $post );
+	if ( ! $taxonomy ) {
+		return [];
+	}
+	$terms    = get_the_terms( $post, $taxonomy->name );
 	if ( ! $terms || is_wp_error( $terms ) ) {
 		return [];
 	}
