@@ -90,28 +90,28 @@ class Calculator extends SingletonPattern {
 			'orderby'        => [
 				'date' => 'DESC',
 			],
-			'tax_query'       => [],
-			'date_query'      => [
+			'tax_query'      => [],
+			'date_query'     => [
 				[
 					'before' => $post->post_date,
 				],
 			],
 		];
-		$scores = $this->taxonomy_score( $post->post_type );
+		$scores     = $this->taxonomy_score( $post->post_type );
 		foreach ( array_keys( $scores ) as $taxonomy ) {
 			$terms = get_the_terms( $post, $taxonomy );
 			if ( $terms && ! is_wp_error( $terms ) ) {
-				$query_args['tax_query'] []= [
+				$query_args['tax_query'] [] = [
 					'taxonomy' => $taxonomy,
 					'terms'    => array_map( function( \WP_Term $term ) {
 						return $term->term_id;
 					}, $terms ),
-					'fields'   => 'term_id'
+					'fields'   => 'term_id',
 				];
 			}
 		}
 		$query_args = apply_filters( 'related_posts_nearest_posts', $query_args, $post );
-		$query = new \WP_Query( $query_args );
+		$query      = new \WP_Query( $query_args );
 		return $query->posts;
 	}
 
