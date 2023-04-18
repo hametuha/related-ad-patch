@@ -25,4 +25,5 @@ add_action( 'plugins_loaded', function() {
 	// Classes.
 	\Hametuha\RelatedAdPatch\Template::get_instance();
 	\Hametuha\RelatedAdPatch\AdPostType::get_instance();
+	\Hametuha\RelatedAdPatch\Setting::get_instance();
 } );

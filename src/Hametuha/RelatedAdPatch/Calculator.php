@@ -43,6 +43,17 @@ class Calculator extends SingletonPattern {
 	}
 
 	/**
+	 * Get logic for post.
+	 *
+	 * @param \WP_Post $post Post object.
+	 * @return string
+	 */
+	public function get_logic_for_post( $post ) {
+		$logic = get_option( 'rap-logic', '' );
+		return apply_filters( 'related_posts_logic', $logic, $post );
+	}
+
+	/**
 	 * Get related posts.
 	 *
 	 * @param null|int|\WP_Post $post  Post object.
@@ -54,6 +65,64 @@ class Calculator extends SingletonPattern {
 		if ( ! $post ) {
 			return [];
 		}
+		$logic = $this->get_logic_for_post( $post );
+		switch ( $logic ) {
+			case 'date':
+				return $this->get_nearest_posts( $post, $limit );
+			default:
+				return $this->get_related_by_taxonomies( $post, $limit );
+		}
+	}
+
+	/**
+	 * Get related post by
+	 *
+	 * @param \WP_Post $post Post object.
+	 * @param int       $limit
+	 * @return \WP_Post[]
+	 */
+	public function get_nearest_posts( $post, $limit ) {
+		$query_args = [
+			'post_type'      => $post->post_type,
+			'post_status'    => 'publish',
+			'posts_per_page' => $limit,
+			'post__not_in'   => [ $post->ID ],
+			'orderby'        => [
+				'date' => 'DESC',
+			],
+			'tax_query'       => [],
+			'date_query'      => [
+				[
+					'before' => $post->post_date,
+				],
+			],
+		];
+		$scores = $this->taxonomy_score( $post->post_type );
+		foreach ( array_keys( $scores ) as $taxonomy ) {
+			$terms = get_the_terms( $post, $taxonomy );
+			if ( $terms && ! is_wp_error( $terms ) ) {
+				$query_args['tax_query'] []= [
+					'taxonomy' => $taxonomy,
+					'terms'    => array_map( function( \WP_Term $term ) {
+						return $term->term_id;
+					}, $terms ),
+					'fields'   => 'term_id'
+				];
+			}
+		}
+		$query_args = apply_filters( 'related_posts_nearest_posts', $query_args, $post );
+		$query = new \WP_Query( $query_args );
+		return $query->posts;
+	}
+
+	/**
+	 * Get related posts by taxonomies.
+	 *
+	 * @param \WP_Post $post Post object.
+	 * @param int       $limit
+	 * @return \WP_Post[]
+	 */
+	public function get_related_by_taxonomies( $post, $limit ) {
 		// Get term ids to filter posts.
 		$tt_ids = [];
 		$scores = $this->taxonomy_score( $post->post_type );
