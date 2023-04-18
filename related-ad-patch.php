@@ -1,8 +1,8 @@
 <?php
 /*
 Plugin Name: Related Ad Patch
-Plugin URI:
-Description: Alternative
+Plugin URI: https://github.com/hametuha/related-ad-patch
+Description: Alternative related post plugin to replace the former Google's related post ad.
 Author: Hametuha INC.
 Author URI: https://hametuha.co.jp
 Text Domain: rap

@@ -1,0 +1,95 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Related Ad Patch\n"
+"POT-Creation-Date: 2023-04-18 22:50+0900\n"
+"PO-Revision-Date: 2023-04-18 22:46+0900\n"
+"Last-Translator: Takahashi Fumiki <takahashi.fumiki@hametuha.co.jp>\n"
+"Language-Team: Takahashi Fumiki <takahashi.fumiki@hametuha.co.jp>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Generator: Poedit 3.2.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: related-ad-patch.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+"X-Poedit-SearchPathExcluded-1: vendor\n"
+"X-Poedit-SearchPathExcluded-2: node_modules\n"
+
+#: src/Hametuha/RelatedAdPatch/AdPostType.php:37
+msgid "Ads"
+msgstr ""
+
+#: src/Hametuha/RelatedAdPatch/AdPostType.php:38
+msgid "Ad"
+msgstr ""
+
+#: src/Hametuha/RelatedAdPatch/AdPostType.php:51
+msgid "Advertiser"
+msgstr ""
+
+#: src/Hametuha/RelatedAdPatch/AdPostType.php:88
+msgid "Advertisement Setting"
+msgstr ""
+
+#: src/Hametuha/RelatedAdPatch/AdPostType.php:96
+msgid "Additional HTML Tag"
+msgstr ""
+
+#: src/Hametuha/RelatedAdPatch/Setting.php:27
+#: src/Hametuha/RelatedAdPatch/Setting.php:66
+msgid "Related Posts Setting"
+msgstr ""
+
+#: src/Hametuha/RelatedAdPatch/Setting.php:27
+msgid "Related Posts"
+msgstr ""
+
+#: src/Hametuha/RelatedAdPatch/Setting.php:37
+msgid "Related Posts Rule"
+msgstr ""
+
+#: src/Hametuha/RelatedAdPatch/Setting.php:41
+msgid "Relation Factor"
+msgstr ""
+
+#: src/Hametuha/RelatedAdPatch/Setting.php:44
+msgid "Matching Term Amount"
+msgstr ""
+
+#: src/Hametuha/RelatedAdPatch/Setting.php:45
+msgid "Post Date"
+msgstr ""
+
+#: template-parts/loop.php:24
+msgid "Category"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Related Ad Patch"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/hametuha/related-ad-patch"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Alternative related post plugin to replace the former Google's related "
+"post ad."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Hametuha INC."
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://hametuha.co.jp"
+msgstr ""

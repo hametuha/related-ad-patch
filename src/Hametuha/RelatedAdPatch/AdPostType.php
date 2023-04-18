@@ -85,7 +85,7 @@ class AdPostType extends SingletonPattern {
 		if ( self::POST_TYPE !== $post_type ) {
 			return;
 		}
-		add_meta_box( 'related-post-ad-post', __( 'Advertisemnet Setting', 'rap' ), function( \WP_Post $post ) {
+		add_meta_box( 'related-post-ad-post', __( 'Advertisement Setting', 'rap' ), function( \WP_Post $post ) {
 			wp_nonce_field( 'update_related_post_ad', '_relatedpostadnonce', false );
 			?>
 			<label style="display: block; margin: 0 0 20px;">
@@ -93,7 +93,7 @@ class AdPostType extends SingletonPattern {
 				<input type="url" class="regular-text" name="external_url" value="<?php echo esc_attr( get_post_meta( $post->ID, '_external_url', true ) ); ?>" />
 			</label>
 			<label style="display: block; margin: 0 0 20px;">
-				<?php esc_html_e( 'Optional Tag', 'rap' ); ?><br />
+				<?php esc_html_e( 'Additional HTML Tag', 'rap' ); ?><br />
 				<textarea name="optional_tag" style="box-sizing: border-box; width: 100%;" rows="5"><?php echo esc_textarea( get_post_meta( $post->ID, '_optional_tag', true ) ); ?></textarea>
 			</label>
 			<?php
