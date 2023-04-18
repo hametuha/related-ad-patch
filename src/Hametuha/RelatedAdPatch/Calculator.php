@@ -90,7 +90,9 @@ class Calculator extends SingletonPattern {
 			'orderby'        => [
 				'date' => 'DESC',
 			],
-			'tax_query'      => [],
+			'tax_query'      => [
+				'relation' => 'OR',
+			],
 			'date_query'     => [
 				[
 					'before' => $post->post_date,
