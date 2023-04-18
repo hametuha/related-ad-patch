@@ -22,6 +22,7 @@ add_action( 'plugins_loaded', function() {
 	load_plugin_textdomain( 'rap', false, basename( __DIR__ ) . '/languages' );
 	// Files.
 	require_once __DIR__ . '/includes/functions.php';
+	require_once __DIR__ . '/includes/shortcode.php';
 	// Classes.
 	\Hametuha\RelatedAdPatch\Template::get_instance();
 	\Hametuha\RelatedAdPatch\AdPostType::get_instance();

@@ -62,10 +62,11 @@ function related_post_patch( $post = null, $count = 8, $ads = 2 ) {
  *
  * @param int|null|WP_Post $post
  * @param int              $count
+ * @param int              $ads   Ads to include.
  * @return string
  */
-function get_the_related_post_patch( $post = null, $count = 8 ) {
-	$results = related_post_patch( $post, $count );
+function get_the_related_post_patch( $post = null, $count = 8, $ads = 2 ) {
+	$results = related_post_patch( $post, $count, $ads );
 	ob_start();
 	global $post;
 	echo '<div class="related-posts">';
@@ -85,10 +86,11 @@ function get_the_related_post_patch( $post = null, $count = 8 ) {
  *
  * @param int|null|WP_Post $post  Post object.
  * @param int              $count Number to display.
+ * @param int              $ads   Ads to include.
  * @return void
  */
-function the_related_post_patch( $post = null, $count = 8 ) {
-	echo get_the_related_post_patch( $post, $count );
+function the_related_post_patch( $post = null, $count = 8, $ads = 2 ) {
+	echo get_the_related_post_patch( $post, $count, $ads );
 }
 
 /**
